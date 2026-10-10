@@ -3,7 +3,6 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { AlertCircle, CheckCircle2, Loader2, Mail, MapPin, Phone } from 'lucide-react'
 import { doctor } from '../../data/doctor'
-import { LIVE } from '../../data/mode'
 import { sendContact } from '../../data/api'
 import { strings } from '../../i18n/strings'
 import { makeContactSchema } from '../../utils/schema'
@@ -54,7 +53,7 @@ export default function ContactSection() {
               <div role="status" className="py-8 text-center">
                 <CheckCircle2 className="mx-auto h-12 w-12 text-forest" strokeWidth={1.4} />
                 <h3 className="mt-4 text-3xl">Thank you</h3>
-                <p className="mx-auto mt-3 max-w-sm text-sm leading-relaxed text-ink-muted">{LIVE ? 'Your message has been sent. The doctor will reply to you by email.' : <>This is a demonstration form — your message has <b>not</b> been sent. Please call or email using the details shown for now.</>}</p>
+                <p className="mx-auto mt-3 max-w-sm text-sm leading-relaxed text-ink-muted">Your message has been sent. The doctor will reply to you by email.</p>
                 <button type="button" className="btn-outline btn-sm mt-6" onClick={() => setSent(false)}>Write another message</button>
               </div>
             ) : (
@@ -77,7 +76,6 @@ export default function ContactSection() {
                 </div>
                 {fail && <p role="alert" className="err">{strings.en.genericError}</p>}
                 <button type="submit" className="btn-primary w-full sm:w-auto" disabled={isSubmitting}>{isSubmitting && <Loader2 className="h-4 w-4 animate-spin" />}{strings.en.send}</button>
-                {!LIVE && <p className="text-xs text-ink-muted">Demo mode: messages are not delivered yet.</p>}
               </form>
             )}
           </div>
