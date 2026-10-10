@@ -1,0 +1,2 @@
+import { PageHeader } from '../components/Section'; import { Research } from '../components/research/Research'; import { Credentials, Presentations, Workshops } from '../components/academic/Sections'
+export default () => <><PageHeader title="Research & Publications" intro="Dissertation, publications, presentations and continuing education."/><Research/><Presentations/><Workshops/><Credentials/></>

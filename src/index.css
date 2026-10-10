@@ -1,0 +1,70 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html { scroll-behavior: auto; }
+html, body { overflow-x: clip; }
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-stopped { overflow: hidden; }
+
+@layer base {
+  body {
+    @apply bg-ivory font-sans text-ink antialiased;
+    font-size: 1.0625rem;
+    line-height: 1.7;
+  }
+  h1, h2, h3, h4 { @apply font-display font-medium text-forest-deep; letter-spacing: -0.015em; line-height: 1.05; }
+  /* Marathi/Hindi headings: Devanagari needs more line height and no negative tracking */
+  :lang(mr) h1, :lang(mr) h2, :lang(mr) h3, :lang(mr) h4 { letter-spacing: 0; line-height: 1.3; }
+  :focus-visible { outline: 2px solid #B97655; outline-offset: 3px; border-radius: 4px; }
+  .on-dark :focus-visible { outline-color: #D9C79B; }
+  ::selection { background: #A8B9A0; color: #17372C; }
+}
+
+@layer components {
+  .wrap { @apply mx-auto w-full max-w-[1240px] px-5 sm:px-8 lg:px-12; }
+
+  .eyebrow { @apply inline-flex items-center gap-3 text-[0.72rem] font-semibold uppercase tracking-[0.24em] text-terracotta-dark; }
+  .eyebrow::before { content: ''; width: 2rem; height: 1px; background: currentColor; opacity: .7; }
+  .on-dark .eyebrow { @apply text-gold-light; }
+
+  .h-section { font-size: clamp(2.4rem, 5.2vw, 4.4rem); line-height: 1.02; }
+
+  .btn { @apply relative inline-flex items-center justify-center gap-2.5 overflow-hidden rounded-full px-7 py-3.5 text-[0.92rem] font-semibold tracking-wide transition-colors duration-300 disabled:cursor-not-allowed disabled:opacity-50; isolation: isolate; }
+  .btn::before { content: ''; position: absolute; inset: 0; z-index: -1; transform: translateY(101%); transition: transform .45s cubic-bezier(.22,1,.36,1); border-radius: inherit; }
+  .btn:hover:not(:disabled)::before { transform: translateY(0); }
+  .btn-primary { @apply btn bg-forest text-ivory hover:text-ivory; }
+  .btn-primary::before { background: #B97655; }
+  .btn-outline { @apply btn border border-forest/40 text-forest hover:text-ivory; }
+  .btn-outline::before { background: #244638; }
+  .btn-gold { @apply btn bg-gold-light text-forest-deep; }
+  .btn-gold::before { background: #FAF7EF; }
+  .btn-ghost-light { @apply btn border border-ivory/40 text-ivory hover:text-forest-deep; }
+  .btn-ghost-light::before { background: #FAF7EF; }
+  .btn-sm { @apply px-5 py-2.5 text-[0.82rem]; }
+
+  .field { @apply w-full rounded-xl border border-forest/20 bg-white px-4 py-3.5 text-[0.95rem] text-ink transition placeholder:text-ink-muted/70 focus:border-forest focus:outline-none focus:ring-2 focus:ring-sage; }
+  .field[aria-invalid='true'] { @apply border-terracotta-dark ring-1 ring-terracotta/40; }
+  .label { @apply mb-1.5 block text-sm font-semibold text-forest; }
+  .err { @apply mt-1.5 flex items-start gap-1.5 text-[0.82rem] font-medium text-terracotta-dark; }
+
+  .paper { background-color: #FAF7EF; }
+  .leaf-pattern {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120' fill='none' stroke='%23244638' stroke-opacity='.07' stroke-width='1'%3E%3Cpath d='M20 100C20 70 35 45 60 30C60 60 48 88 20 100Z'/%3E%3Cpath d='M20 100C34 78 46 58 60 30'/%3E%3Cpath d='M82 40C82 24 91 12 106 5C106 22 99 36 82 40Z'/%3E%3C/svg%3E");
+  }
+  .grain::after {
+    content: ''; position: absolute; inset: 0; pointer-events: none; opacity: .06; mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.6'/%3E%3C/svg%3E");
+  }
+  .skeleton { background: linear-gradient(90deg, #EAE0CF 25%, #F4EEE1 50%, #EAE0CF 75%); background-size: 200% 100%; @apply animate-shimmer rounded-xl; }
+}
+
+.link-u { background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat; transition: background-size .35s; padding-bottom: 2px; }
+.link-u:hover { background-size: 100% 1px; }
+.marquee:hover .animate-marquee { animation-play-state: paused; }
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee, .animate-spinslow, .animate-sway, .animate-shimmer { animation: none !important; }
+  *, *::before, *::after { transition-duration: .01ms !important; scroll-behavior: auto !important; }
+}

@@ -1,0 +1,116 @@
+// Interface strings for the booking experience (English).
+// Marketing pages stay in English; service names/descriptions are bilingual in data/services.ts.
+import { LIVE, REMINDER_MINUTES } from '../data/mode'
+
+const en = {
+  langName: 'English',
+  bookTitle: 'Book your consultation',
+  bookIntro: 'Choose a service, pick a date and time, and share a few details. It takes about two minutes.',
+  demoBanner: 'Demo mode — availability shown is sample data and nothing is sent to the doctor.',
+  sampleAvailability: LIVE ? 'Online booking' : 'Sample availability',
+  stepsLabel: 'Booking progress',
+  steps: ['Service', 'Date', 'Time', 'Details', 'Review'],
+  chooseService: 'Choose a service',
+  chooseServiceHint: 'The date, time slots and fee update according to the service you select.',
+  chooseDate: 'Choose a date',
+  chooseTime: 'Choose a time',
+  yourDetails: 'Your details',
+  reviewTitle: 'Review your appointment',
+  selectedService: 'Selected service',
+  changeService: 'Change service',
+  changeDate: 'Change date',
+  changeTime: 'Change time',
+  duration: 'Duration',
+  minutes: 'min',
+  fee: 'Consultation fee',
+  feeTbc: 'To be confirmed',
+  onlineBadge: 'Online consultation',
+  continue: 'Continue',
+  back: 'Back',
+  edit: 'Edit details',
+  summary: 'Appointment summary',
+  noSelection: 'Not selected yet',
+  service: 'Service',
+  date: 'Date',
+  time: 'Time (IST)',
+  mode: 'Mode',
+  modeValue: 'Online video consultation',
+  available: 'Available',
+  selected: 'Selected',
+  unavailable: 'Unavailable',
+  prevMonth: 'Previous month',
+  nextMonth: 'Next month',
+  calendarHelp: 'Use arrow keys to move between dates, Enter to select.',
+  loadingSlots: 'Loading available times…',
+  noSlots: 'No times are free on this date. Please choose another date.',
+  pickDateFirst: 'Choose a date to see the available times.',
+  morning: 'Morning',
+  afternoon: 'Afternoon',
+  evening: 'Evening',
+  fullName: 'Patient full name',
+  mobile: 'Mobile number',
+  email: 'Email address',
+  prefLang: 'Preferred language',
+  reason: 'Reason for consultation',
+  notes: 'Additional notes',
+  optional: '(optional)',
+  namePlaceholder: 'e.g. Sneha Patil',
+  mobilePlaceholder: '10-digit mobile number',
+  emailPlaceholder: 'name@example.com',
+  reasonPlaceholder: 'Briefly describe what you would like to discuss',
+  notesPlaceholder: 'Anything else the doctor should know',
+  nameHelp: 'Write your name in Marathi, Hindi or English — exactly as you like.',
+  consent: LIVE
+    ? 'I have read the Privacy Policy. I agree that my details may be used to arrange this appointment and that I may receive confirmation and reminder messages, including the Google Meet link, by email and WhatsApp.'
+    : 'I have read the Privacy Policy and agree that my details may be used to arrange this appointment.',
+  privacyLink: 'Privacy Policy',
+  bookAppointment: 'Book appointment',
+  confirmDemo: LIVE ? 'Confirm appointment' : 'Confirm demo booking',
+  sending: 'Confirming…',
+  genericError: 'Something went wrong. Please try again.',
+  reviewDemoNote: LIVE
+    ? `After you confirm, your Google Meet link will be sent to you by email and WhatsApp about ${REMINDER_MINUTES} minutes before the appointment.`
+    : 'This is a demonstration. Confirming will NOT send your request to the doctor or schedule a real appointment.',
+  slotTaken: 'Sorry, that time was just booked by someone else. Please choose another time.',
+  networkError: 'We could not reach the booking server. Please check your internet connection and try again.',
+  slotsError: 'Could not load available times. Please try again.',
+  retry: 'Try again',
+  errors: {
+    nameRequired: 'Please enter the patient’s full name.',
+    nameInvalid: 'Names may use letters, spaces, full stops, apostrophes or hyphens — in any script.',
+    mobileInvalid: 'Please enter a valid 10-digit Indian mobile number (starting with 6–9).',
+    emailInvalid: 'Please enter a valid email, like name@example.com.',
+    reasonShort: 'Please add a few words about the reason for the visit.',
+    consentRequired: 'Please accept the privacy policy to continue.',
+    contactInvalid: 'Enter a valid email address.',
+  },
+  // confirmation
+  confirmTitle: LIVE ? 'Appointment confirmed' : 'Demo booking complete',
+  confirmHello: (name: string) => LIVE ? `Thank you ${name}, your appointment is confirmed.` : `Hello ${name}, your demo appointment has been recorded.`,
+  confirmDemoTitle: LIVE ? 'What happens next' : 'This is a demonstration',
+  confirmDemoBody: LIVE
+    ? `You will receive a confirmation by email and WhatsApp. About ${REMINDER_MINUTES} minutes before your appointment we will send you the Google Meet link by email and WhatsApp. Please keep your phone nearby and check your spam folder.`
+    : 'No appointment has been scheduled and nothing has been sent to the doctor, by email, WhatsApp or any other channel.',
+  reference: LIVE ? 'Booking reference' : 'Demo reference',
+  onlineInfoTitle: 'Online consultation',
+  onlineInfoBody: LIVE
+    ? `Your consultation takes place on Google Meet. The link is sent to you by email and WhatsApp about ${REMINDER_MINUTES} minutes before the start time. The doctor will admit you from the waiting screen.`
+    : 'Once live scheduling is connected, joining details will be shared with you by the practice. No meeting link has been created for this demo.',
+  goHome: 'Back to home',
+  bookAnother: 'Book another appointment',
+  noBookingTitle: 'No booking in progress',
+  noBookingBody: 'Start a new booking to see your appointment summary here.',
+  startBooking: 'Start booking',
+  // contact form
+  contactName: 'Your name',
+  contactContact: 'Email address',
+  contactMessage: 'Message',
+  send: 'Send message',
+}
+
+export type Strings = typeof en
+
+// The site is English-only; 'mr' is kept as an alias so the language plumbing keeps working.
+const mr: Strings = en
+
+export const strings = { en, mr }
