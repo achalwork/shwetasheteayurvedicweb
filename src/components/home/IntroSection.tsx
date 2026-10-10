@@ -13,7 +13,7 @@ const facts = [
 export default function IntroSection() {
   return (
     <section className="relative overflow-hidden bg-ivory py-24 sm:py-32">
-      <div aria-hidden className="pointer-events-none absolute -left-40 top-10 h-[34rem] w-[34rem] text-sage/70"><Mandala className="h-full w-full animate-spinslow" petals={16} /></div>
+ <div aria-hidden className="pointer-events-none absolute -left-56 top-10 h-[34rem] w-[34rem] text-sage/20"><Mandala className="h-full w-full animate-spinslow" petals={16} /></div>
       <div className="wrap relative grid gap-14 lg:grid-cols-12">
         <div className="lg:col-span-7">
           <Reveal><p className="eyebrow">Meet the doctor</p></Reveal>
