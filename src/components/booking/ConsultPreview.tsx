@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import { Rv } from '../animations/Reveal'; import DoctorCard from '../DoctorCard'; import BookingCalendar from '../BookingCalendar'; import TimeSlotPicker from '../TimeSlotPicker'
+import { Rv } from '../animations/Reveal'; import DoctorCard from '../DoctorCard'; import BookingCalendar from './BookingCalendar'; import TimeSlotPicker from '../TimeSlotPicker'
 import { useBooking } from '../../hooks/useBooking'; import { formatTime } from '../../utils/date'
 export default function ConsultPreview() {
   const { booking, update, setStep } = useBooking(); const nav = useNavigate()
