@@ -1,7 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { AlertTriangle, CalendarDays, Clock, Home, IndianRupee, Leaf, Plus, Video, Info } from 'lucide-react'
-import { LIVE } from '../../data/mode'
+import { CalendarDays, Clock, Home, IndianRupee, Info, Leaf, Plus, Video } from 'lucide-react'
 import { useBooking } from '../../hooks/useBooking'
 import { useHtmlLang, useLang } from '../../hooks/useLang'
 import { getService } from '../../data/services'
@@ -61,8 +60,8 @@ export default function BookingConfirmation() {
             <h1 lang={lang} className="mx-auto mt-4 max-w-xl text-[clamp(1.9rem,4.2vw,2.8rem)] leading-[1.25]">{t.confirmHello(p.fullName)}</h1>
           </div>
 
-          <div role="note" className="mx-6 flex gap-3 rounded-2xl border border-terracotta/40 bg-terracotta/10 p-4 text-sm text-forest-deep sm:mx-12">
-            {LIVE ? <Info className="mt-0.5 h-4 w-4 shrink-0 text-forest" /> : <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0 text-terracotta-dark" />}
+            <div role="note" className="mx-6 flex gap-3 rounded-2xl border border-terracotta/40 bg-terracotta/10 p-4 text-sm text-forest-deep sm:mx-12">
+            <Info className="mt-0.5 h-4 w-4 shrink-0 text-forest" />
             <p><b className="font-semibold">{t.confirmDemoTitle}.</b> {t.confirmDemoBody}</p>
           </div>
 

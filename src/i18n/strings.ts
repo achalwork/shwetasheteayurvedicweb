@@ -1,13 +1,12 @@
 // Interface strings for the booking experience (English).
 // Marketing pages stay in English; service names/descriptions are bilingual in data/services.ts.
-import { LIVE, REMINDER_MINUTES } from '../data/mode'
+import { REMINDER_MINUTES } from '../data/mode'
 
 const en = {
   langName: 'English',
   bookTitle: 'Book your consultation',
   bookIntro: 'Choose a service, pick a date and time, and share a few details. It takes about two minutes.',
-  demoBanner: 'Demo mode — availability shown is sample data and nothing is sent to the doctor.',
-  sampleAvailability: LIVE ? 'Online booking' : 'Sample availability',
+  sampleAvailability: 'Online booking',
   stepsLabel: 'Booking progress',
   steps: ['Service', 'Date', 'Time', 'Details', 'Review'],
   chooseService: 'Choose a service',
@@ -60,17 +59,13 @@ const en = {
   reasonPlaceholder: 'Briefly describe what you would like to discuss',
   notesPlaceholder: 'Anything else the doctor should know',
   nameHelp: 'Write your name in Marathi, Hindi or English — exactly as you like.',
-  consent: LIVE
-    ? 'I have read the Privacy Policy. I agree that my details may be used to arrange this appointment and that I may receive confirmation and reminder messages, including the Google Meet link, by email and WhatsApp.'
-    : 'I have read the Privacy Policy and agree that my details may be used to arrange this appointment.',
+  consent: 'I have read the Privacy Policy. I agree that my details may be used to arrange this appointment and that I may receive confirmation and reminder messages, including the Google Meet link, by email and WhatsApp.',
   privacyLink: 'Privacy Policy',
   bookAppointment: 'Book appointment',
-  confirmDemo: LIVE ? 'Confirm appointment' : 'Confirm demo booking',
+  confirmDemo: 'Confirm appointment',
   sending: 'Confirming…',
   genericError: 'Something went wrong. Please try again.',
-  reviewDemoNote: LIVE
-    ? `After you confirm, your Google Meet link will be sent to you by email and WhatsApp about ${REMINDER_MINUTES} minutes before the appointment.`
-    : 'This is a demonstration. Confirming will NOT send your request to the doctor or schedule a real appointment.',
+  reviewDemoNote: `After you confirm, your Google Meet link will be sent to you by email and WhatsApp about ${REMINDER_MINUTES} minutes before the appointment.`,
   slotTaken: 'Sorry, that time was just booked by someone else. Please choose another time.',
   networkError: 'We could not reach the booking server. Please check your internet connection and try again.',
   slotsError: 'Could not load available times. Please try again.',
@@ -85,17 +80,13 @@ const en = {
     contactInvalid: 'Enter a valid email address.',
   },
   // confirmation
-  confirmTitle: LIVE ? 'Appointment confirmed' : 'Demo booking complete',
-  confirmHello: (name: string) => LIVE ? `Thank you ${name}, your appointment is confirmed.` : `Hello ${name}, your demo appointment has been recorded.`,
-  confirmDemoTitle: LIVE ? 'What happens next' : 'This is a demonstration',
-  confirmDemoBody: LIVE
-    ? `You will receive a confirmation by email and WhatsApp. About ${REMINDER_MINUTES} minutes before your appointment we will send you the Google Meet link by email and WhatsApp. Please keep your phone nearby and check your spam folder.`
-    : 'No appointment has been scheduled and nothing has been sent to the doctor, by email, WhatsApp or any other channel.',
-  reference: LIVE ? 'Booking reference' : 'Demo reference',
+  confirmTitle: 'Appointment confirmed',
+  confirmHello: (name: string) => `Thank you ${name}, your appointment is confirmed.`,
+  confirmDemoTitle: 'What happens next',
+  confirmDemoBody: `You will receive a confirmation by email and WhatsApp. About ${REMINDER_MINUTES} minutes before your appointment we will send you the Google Meet link by email and WhatsApp. Please keep your phone nearby and check your spam folder.`,
+  reference: 'Booking reference',
   onlineInfoTitle: 'Online consultation',
-  onlineInfoBody: LIVE
-    ? `Your consultation takes place on Google Meet. The link is sent to you by email and WhatsApp about ${REMINDER_MINUTES} minutes before the start time. The doctor will admit you from the waiting screen.`
-    : 'Once live scheduling is connected, joining details will be shared with you by the practice. No meeting link has been created for this demo.',
+  onlineInfoBody: `Your consultation takes place on Google Meet. The link is sent to you by email and WhatsApp about ${REMINDER_MINUTES} minutes before the start time. The doctor will admit you from the waiting screen.`,
   goHome: 'Back to home',
   bookAnother: 'Book another appointment',
   noBookingTitle: 'No booking in progress',

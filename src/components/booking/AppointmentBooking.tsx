@@ -1,12 +1,10 @@
 import { useEffect, useRef, useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { AlertTriangle, ArrowRight, Info, Check, Clock, IndianRupee, Loader2, Video } from 'lucide-react'
+import { ArrowRight, Info, Check, Clock, IndianRupee, Loader2, Video } from 'lucide-react'
 import { useBooking } from '../../hooks/useBooking'
 import { useHtmlLang, useLang } from '../../hooks/useLang'
 import { getService } from '../../data/services'
-import { AVAILABILITY_IS_MOCK } from '../../data/availability'
-import { LIVE } from '../../data/mode'
 import { ApiError, createBooking } from '../../data/api'
 import { formatDuration, formatFee } from '../../utils/format'
 import { formatDate, formatTime } from '../../utils/date'
@@ -88,12 +86,7 @@ export default function AppointmentBooking() {
       </section>
 
       <div className="wrap relative z-10 -mt-14 pb-20" ref={panelTop} style={{ scrollMarginTop: '5rem' }}>
-        {AVAILABILITY_IS_MOCK && (
-          <div className="mb-4 flex items-start gap-3 rounded-2xl border border-gold bg-beige-light px-5 py-3.5 text-sm text-forest-deep" role="note">
-            <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0 text-terracotta" />
-            <p>{AVAILABILITY_IS_MOCK ? t.demoBanner : ''}</p>
-          </div>
-        )}
+
 
         <div className="overflow-hidden rounded-[2rem] border border-forest/15 bg-ivory shadow-[0_40px_90px_-50px_rgba(23,55,44,.65)]">
           {/* progress */}
@@ -180,7 +173,7 @@ export default function AppointmentBooking() {
                       <div key={k} className="grid gap-1 py-3.5 sm:grid-cols-[10rem_1fr]"><dt className="font-semibold text-forest">{k}</dt><dd className="whitespace-pre-wrap break-words">{v}</dd></div>
                     ))}
                   </dl>
-                  <div role="note" className="mt-5 flex gap-3 rounded-2xl border border-terracotta/40 bg-terracotta/10 p-4 text-sm text-forest-deep">{LIVE ? <Info className="mt-0.5 h-4 w-4 shrink-0 text-forest" /> : <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0 text-terracotta-dark" />}{t.reviewDemoNote}</div>
+                  <div role="note" className="mt-5 flex gap-3 rounded-2xl border border-terracotta/40 bg-terracotta/10 p-4 text-sm text-forest-deep"><Info className="mt-0.5 h-4 w-4 shrink-0 text-forest" />{t.reviewDemoNote}</div>
                   {err && <p role="alert" className="err mt-3">{err}</p>}
                   <div className="mt-6 flex flex-wrap gap-3">
                     <button type="button" className="btn-outline" onClick={() => go(STEP.DETAILS)}>{t.edit}</button>
