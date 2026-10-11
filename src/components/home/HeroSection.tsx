@@ -1,3 +1,4 @@
+import type React from 'react'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { ArrowRight, Video } from 'lucide-react'
@@ -9,9 +10,18 @@ import { scrollToId } from '../../utils/format'
 const EASE = [0.22, 1, 0.36, 1] as const
 const line = (delay: number) => ({ initial: { y: '108%' }, animate: { y: 0 }, transition: { duration: 1, delay, ease: EASE } })
 
-// Photo la top-left pasun zoom kela ahe, mhanje tai frame chya center la yetat.
-// Tai ajun dava kade vattat astil tar 1.5 kara, ujavya kade vattat astil tar 1.3 kara.
-const PORTRAIT_ZOOM = 1.4
+// Photo is already shown fully at zoom 1 (container ratio = image ratio), so the only way to zoom out
+// is to scale below 1. Lower = more zoomed out (0.85 = a lot, 0.95 = slight).
+// The gap that appears at the edges is filled by PORTRAIT_BG, so keep it close to the wall colour in the photo.
+const PORTRAIT_ZOOM = 0.93
+const PORTRAIT_BG = '#e6e0d6'
+// Feathers the photo edges so they melt into the blurred background (no hard border).
+const FEATHER = {
+  maskImage: 'linear-gradient(to right, transparent, #000 2.5%, #000 97.5%, transparent), linear-gradient(to bottom, transparent, #000 2.5%, #000 97.5%, transparent)',
+  maskComposite: 'intersect',
+  WebkitMaskImage: 'linear-gradient(to right, transparent, #000 2.5%, #000 97.5%, transparent), linear-gradient(to bottom, transparent, #000 2.5%, #000 97.5%, transparent)',
+  WebkitMaskComposite: 'source-in',
+} as React.CSSProperties
 
 export default function HeroSection() {
   return (
@@ -43,15 +53,18 @@ export default function HeroSection() {
           </motion.div>
         </div>
 
-        {/* portrait: arch + soft backdrop + one card. Mobile var pr-4/pb-4 ne backdrop (offset 16px) screen chya baher jat nahi */}
+        {/* portrait: arch + soft backdrop + one card. Mobile pr-4/pb-4 keeps the backdrop (offset 16px) inside the screen */}
         <div className="mx-auto w-full max-w-[26rem] pb-4 pr-4 md:ml-auto md:mr-0 md:p-0 lg:max-w-[27rem]">
         <div className="relative">
           <div aria-hidden className="absolute inset-0 translate-x-4 translate-y-4 rounded-t-[999px] rounded-b-[2rem] bg-sage-light" />
           <motion.div
-            className="relative aspect-[4/5] overflow-hidden rounded-t-[999px] rounded-b-[2rem] bg-beige shadow-[0_24px_60px_-30px_rgba(23,55,44,.45)]"
+            className="relative aspect-[4/5] overflow-hidden rounded-t-[999px] rounded-b-[2rem] shadow-[0_24px_60px_-30px_rgba(23,55,44,.45)]"
+            style={{ backgroundColor: PORTRAIT_BG }}
             initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, delay: 0.2, ease: EASE }}
           >
-            <img src={portrait} alt="Dr. Shweta Sanjay Shete" width={720} height={900} fetchPriority="high" className="h-full w-full object-cover object-top" style={{ transformOrigin: '0% 0%', transform: `scale(${PORTRAIT_ZOOM})` }} />
+            {/* blurred copy of the same photo fills the gap, so there is no visible frame */}
+            <img src={portrait} alt="" aria-hidden width={1024} height={1280} className="absolute inset-0 h-full w-full scale-110 object-cover object-top blur-md" />
+            <img src={portrait} alt="Dr. Shweta Sanjay Shete" width={1024} height={1280} fetchPriority="high" className="relative h-full w-full object-cover object-center" style={{ transformOrigin: '50% 55%', transform: `scale(${PORTRAIT_ZOOM})`, ...FEATHER }} />
           </motion.div>
           <motion.div
             initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.9, ease: EASE }}
