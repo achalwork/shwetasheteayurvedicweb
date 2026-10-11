@@ -2,35 +2,36 @@ import { Link } from 'react-router-dom'
 import { Globe2, MapPin, Video } from 'lucide-react'
 import { Lotus, Mandala } from '../botanical/Botanicals'
 import { Reveal, RiseHeading } from '../ui/Reveal'
-import { doctor } from '../../data/doctor'
+import { useLang } from '../../hooks/useLang'
 
-const facts = [
-  { icon: Video, label: 'Online consultations', text: 'From the comfort of your home' },
-  { icon: Globe2, label: 'Your language', text: 'Marathi, Hindi and English' },
-  { icon: MapPin, label: 'Based in Kolhapur', text: 'Maharashtra, India' },
-]
+const ICONS = [Video, Globe2, MapPin]
 
 export default function IntroSection() {
+  const { site, lang } = useLang()
+  const i = site.intro
+  const doctor = site.doctor
+  const facts = i.facts.map((f, n) => ({ ...f, icon: ICONS[n] }))
+  // Drop cap only for English — splitting a Devanagari word on its first character would break the conjunct.
+  const dropCap = lang === 'en'
   return (
     <section className="relative overflow-hidden bg-ivory py-24 sm:py-32">
  <div aria-hidden className="pointer-events-none absolute -left-56 top-10 h-[34rem] w-[34rem] text-sage/20"><Mandala className="h-full w-full animate-spinslow" petals={16} /></div>
       <div className="wrap relative grid gap-14 lg:grid-cols-12">
         <div className="lg:col-span-7">
-          <Reveal><p className="eyebrow">Meet the doctor</p></Reveal>
-          <RiseHeading text="A Thoughtful Approach to Ayurvedic Wellbeing" className="h-section mt-6 max-w-3xl" />
+          <Reveal><p className="eyebrow">{i.eyebrow}</p></Reveal>
+          <RiseHeading text={i.heading} className="h-section mt-6 max-w-3xl" />
         </div>
         <div className="lg:col-span-5 lg:pt-14">
           <Reveal delay={0.1}>
             <p className="text-[1.08rem] leading-[1.85] text-ink-muted">
-              <span className="float-left mr-3 mt-1 font-display text-[4.6rem] font-semibold leading-[0.78] text-terracotta">D</span>
-              r. Shweta Sanjay Shete is an Ayurvedic doctor in Kolhapur, Maharashtra, with an MD in Rachana Sharir and a B.A.M.S. Her online consultations are unhurried and personal — she listens first, then looks at your concerns together with your routine, food habits and lifestyle.
+              {dropCap ? <><span className="float-left mr-3 mt-1 font-display text-[4.6rem] font-semibold leading-[0.78] text-terracotta">{i.p1.charAt(0)}</span>{i.p1.slice(1)}</> : i.p1}
             </p>
             <p className="mt-5 text-[1.08rem] leading-[1.85] text-ink-muted">
-              Whether you are visiting for the first time or following up, you can choose the kind of consultation that suits you and book a time that works for you.
+              {i.p2}
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-6">
-              <Link to="/book" className="btn-primary">Book a consultation</Link>
-              <Link to="/online-consultation" className="link-u text-sm font-semibold text-forest">How online consultation works</Link>
+              <Link to="/book" className="btn-primary">{i.book}</Link>
+              <Link to="/online-consultation" className="link-u text-sm font-semibold text-forest">{i.how}</Link>
             </div>
           </Reveal>
         </div>

@@ -1,17 +1,19 @@
 import { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Plus } from 'lucide-react'
-import { faqs } from '../../data/faqs'
+import { useLang } from '../../hooks/useLang'
 import { Reveal, RiseHeading } from '../ui/Reveal'
 
 export default function FAQSection() {
+  const { site } = useLang()
+  const faqs = site.faq.items
   const [open, setOpen] = useState<number | null>(0)
   return (
     <section className="bg-ivory py-24 sm:py-32">
       <div className="wrap grid gap-12 lg:grid-cols-[0.8fr_1.4fr] lg:gap-20">
         <div>
-          <Reveal><p className="eyebrow">Questions</p></Reveal>
-          <RiseHeading text="Frequently Asked Questions" className="h-section mt-6" />
+          <Reveal><p className="eyebrow">{site.faq.eyebrow}</p></Reveal>
+          <RiseHeading text={site.faq.heading} className="h-section mt-6" />
         </div>
         <Reveal>
           <ul className="border-t border-forest/20">

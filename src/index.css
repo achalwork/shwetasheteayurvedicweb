@@ -17,6 +17,15 @@ html.lenis, html.lenis body { height: auto; }
   h1, h2, h3, h4 { @apply font-display font-medium text-forest-deep; letter-spacing: -0.015em; line-height: 1.05; }
   /* Marathi/Hindi headings: Devanagari needs more line height and no negative tracking */
   :lang(mr) h1, :lang(mr) h2, :lang(mr) h3, :lang(mr) h4 { letter-spacing: 0; line-height: 1.3; }
+  /* Devanagari: letter-spacing breaks conjuncts/matras, so neutralise any tracking utility and uppercase styling */
+  :lang(mr) [class*='tracking-'], :lang(mr) .eyebrow { letter-spacing: 0.01em !important; text-transform: none !important; }
+  body:lang(mr) { line-height: 1.8; }
+  /* Marathi section labels (eyebrows): larger, and centred on mobile */
+  :lang(mr) .eyebrow { font-size: 1.05rem; font-weight: 700; line-height: 1.5; }
+  @media (max-width: 1023px) {
+    :lang(mr) .eyebrow { display: flex; justify-content: center; width: 100%; text-align: center; }
+  }
+  :lang(mr) .h-section { font-size: clamp(2rem, 4.4vw, 3.5rem); line-height: 1.3; }
   :focus-visible { outline: 2px solid #B97655; outline-offset: 3px; border-radius: 4px; }
   .on-dark :focus-visible { outline-color: #D9C79B; }
   ::selection { background: #A8B9A0; color: #17372C; }

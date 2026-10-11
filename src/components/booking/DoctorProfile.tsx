@@ -1,9 +1,10 @@
 import portrait from '../../assets/portrait.webp'
-import { doctor } from '../../data/doctor'
+import { useLang } from '../../hooks/useLang'
 
 // Photo la 135% width ne top-left pasun zoom kela ahe, mhanje chehra circle chya center la yeto.
 // Chehra khali/var vattat astil tar w-[135%] badla (jaast = jaast zoom).
 export default function DoctorProfile({ compact = false }: { compact?: boolean }) {
+  const doctor = useLang().site.doctor
   return (
     <div className="flex items-center gap-4">
       <span className={`${compact ? 'h-14 w-14' : 'h-[4.5rem] w-[4.5rem]'} relative block shrink-0 overflow-hidden rounded-full border-2 border-gold`}>

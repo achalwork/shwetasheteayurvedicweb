@@ -2,6 +2,7 @@ import { lazy, Suspense } from 'react'
 import { Link, Navigate, Route, Routes } from 'react-router-dom'
 import MainLayout from './layouts/MainLayout'
 import Home from './pages/Home'
+import { useLang } from './hooks/useLang'
 
 const Services = lazy(() => import('./pages/Services'))
 const OnlineConsultation = lazy(() => import('./pages/OnlineConsultation'))
@@ -10,13 +11,16 @@ const Book = lazy(() => import('./pages/Book'))
 const Confirmation = lazy(() => import('./pages/Confirmation'))
 const Privacy = lazy(() => import('./pages/Privacy'))
 
-const NotFound = () => (
-  <div className="wrap py-28 text-center">
-    <h1 className="text-5xl">Page not found</h1>
-    <p className="mt-3 text-ink-muted">The page you are looking for does not exist.</p>
-    <Link to="/" className="btn-primary mt-8">Go to home</Link>
-  </div>
-)
+const NotFound = () => {
+  const { site } = useLang()
+  return (
+    <div className="wrap py-28 text-center">
+      <h1 className="text-5xl">{site.notFound.title}</h1>
+      <p className="mt-3 text-ink-muted">{site.notFound.text}</p>
+      <Link to="/" className="btn-primary mt-8">{site.notFound.home}</Link>
+    </div>
+  )
+}
 
 export default function App() {
   return (

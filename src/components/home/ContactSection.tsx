@@ -4,7 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { AlertCircle, CheckCircle2, Loader2, Mail, MapPin, Phone } from 'lucide-react'
 import { doctor } from '../../data/doctor'
 import { sendContact } from '../../data/api'
-import { strings } from '../../i18n/strings'
+import { useLang } from '../../hooks/useLang'
 import { makeContactSchema } from '../../utils/schema'
 import { Reveal, RiseHeading } from '../ui/Reveal'
 import { Sprig } from '../botanical/Botanicals'
@@ -12,7 +12,9 @@ import { Sprig } from '../botanical/Botanicals'
 interface Form { name: string; contact: string; message: string }
 
 export default function ContactSection() {
-  const e = strings.en.errors
+  const { t, site } = useLang()
+  const c = site.contact
+  const e = t.errors
   const schema = useMemo(() => makeContactSchema({ ...e }), [e])
   const { register, handleSubmit, reset, formState: { errors, isSubmitting } } = useForm<Form>({ resolver: zodResolver(schema), mode: 'onTouched' })
   const [sent, setSent] = useState(false)
@@ -22,19 +24,19 @@ export default function ContactSection() {
     try { await sendContact(d); setSent(true); reset() } catch { setFail(true) }
   }
   const details = [
-    { icon: Phone, label: 'Phone', value: doctor.phone, href: doctor.phoneHref },
-    { icon: Mail, label: 'Email', value: doctor.email, href: `mailto:${doctor.email}` },
-    { icon: MapPin, label: 'Location', value: doctor.location },
+    { icon: Phone, label: c.phone, value: doctor.phone, href: doctor.phoneHref },
+    { icon: Mail, label: c.email, value: doctor.email, href: `mailto:${doctor.email}` },
+    { icon: MapPin, label: c.location, value: site.doctor.location },
   ]
   return (
     <section className="relative overflow-hidden bg-ivory py-20 sm:py-28">
       <Sprig aria-hidden className="pointer-events-none absolute -right-8 top-10 h-96 text-sage/50" />
       <div className="wrap relative grid gap-14 lg:grid-cols-[1fr_1.15fr] lg:gap-20">
         <div>
-          <Reveal><p className="eyebrow">Contact</p></Reveal>
-          <RiseHeading text="We would love to hear from you" className="h-section mt-6" />
+          <Reveal><p className="eyebrow">{c.pageEyebrow}</p></Reveal>
+          <RiseHeading text={c.heading} className="h-section mt-6" />
           <Reveal delay={0.1}>
-            <p className="mt-6 max-w-md text-ink-muted">For questions about consultations, reach out using any of the details below. To book a consultation, please use the booking page.</p>
+            <p className="mt-6 max-w-md text-ink-muted">{c.intro}</p>
             <ul className="mt-10 space-y-6">
               {details.map(d => (
                 <li key={d.label} className="flex items-center gap-5">
@@ -52,16 +54,16 @@ export default function ContactSection() {
             {sent ? (
               <div role="status" className="py-8 text-center">
                 <CheckCircle2 className="mx-auto h-12 w-12 text-forest" strokeWidth={1.4} />
-                <h3 className="mt-4 text-3xl">Thank you</h3>
-                <p className="mx-auto mt-3 max-w-sm text-sm leading-relaxed text-ink-muted">Your message has been sent. The doctor will reply to you by email.</p>
-                <button type="button" className="btn-outline btn-sm mt-6" onClick={() => setSent(false)}>Write another message</button>
+                <h3 className="mt-4 text-3xl">{c.thanks}</h3>
+                <p className="mx-auto mt-3 max-w-sm text-sm leading-relaxed text-ink-muted">{c.sent}</p>
+                <button type="button" className="btn-outline btn-sm mt-6" onClick={() => setSent(false)}>{c.another}</button>
               </div>
             ) : (
               <form onSubmit={handleSubmit(submit)} noValidate className="space-y-5">
-                <h3 className="text-3xl">Send a message</h3>
+                <h3 className="text-3xl">{c.formTitle}</h3>
                 {[
-                  { id: 'name', label: strings.en.contactName, ph: 'e.g. Sneha Patil', ac: 'name' },
-                  { id: 'contact', label: strings.en.contactContact, ph: 'name@example.com', ac: 'email' },
+                  { id: 'name', label: t.contactName, ph: t.namePlaceholder, ac: 'name' },
+                  { id: 'contact', label: t.contactContact, ph: t.emailPlaceholder, ac: 'email' },
                 ].map(f => (
                   <div key={f.id}>
                     <label htmlFor={`c-${f.id}`} className="label">{f.label}</label>
@@ -70,12 +72,12 @@ export default function ContactSection() {
                   </div>
                 ))}
                 <div>
-                  <label htmlFor="c-message" className="label">{strings.en.contactMessage}</label>
-                  <textarea id="c-message" rows={4} className="field resize-y" placeholder="How can we help?" aria-invalid={!!errors.message} {...register('message')} />
+                  <label htmlFor="c-message" className="label">{t.contactMessage}</label>
+                  <textarea id="c-message" rows={4} className="field resize-y" placeholder={c.messagePlaceholder} aria-invalid={!!errors.message} {...register('message')} />
                   {errors.message && <p role="alert" className="err"><AlertCircle className="mt-0.5 h-3.5 w-3.5 shrink-0" />{errors.message.message}</p>}
                 </div>
-                {fail && <p role="alert" className="err">{strings.en.genericError}</p>}
-                <button type="submit" className="btn-primary w-full sm:w-auto" disabled={isSubmitting}>{isSubmitting && <Loader2 className="h-4 w-4 animate-spin" />}{strings.en.send}</button>
+                {fail && <p role="alert" className="err">{t.genericError}</p>}
+                <button type="submit" className="btn-primary w-full sm:w-auto" disabled={isSubmitting}>{isSubmitting && <Loader2 className="h-4 w-4 animate-spin" />}{t.send}</button>
               </form>
             )}
           </div>

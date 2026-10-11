@@ -5,21 +5,21 @@ import HowItWorks from '../components/home/HowItWorks'
 import FAQSection from '../components/home/FAQSection'
 import FinalCTA from '../components/home/FinalCTA'
 import { Reveal } from '../components/ui/Reveal'
+import { useLang } from '../hooks/useLang'
 
-const prep = [
-  { icon: Wifi, title: 'A stable connection', text: 'A quiet spot with a steady internet connection helps the conversation flow.' },
-  { icon: Headphones, title: 'A private space', text: 'Choose a place where you can speak comfortably and hear clearly.' },
-  { icon: Languages, title: 'Your language', text: 'Tell us whether you prefer Marathi, Hindi or English when you book.' },
-]
+const ICONS = [Wifi, Headphones, Languages]
 
 export default function OnlineConsultation() {
+  const { site } = useLang()
+  const o = site.online
+  const prep = o.prep.map((p, i) => ({ ...p, icon: ICONS[i] }))
   return (
     <>
-      <PageHeader eyebrow="Online consultation" title="Ayurvedic care, from home">Consult Dr. Shweta Sanjay Shete over video — no travel needed.</PageHeader>
+      <PageHeader eyebrow={o.eyebrow} title={o.title}>{o.sub}</PageHeader>
       <HowItWorks />
       <section className="bg-beige py-20 sm:py-24">
         <div className="wrap">
-          <Reveal><h2 className="h-section max-w-2xl">Before your consultation</h2></Reveal>
+          <Reveal><h2 className="h-section max-w-2xl">{o.prepTitle}</h2></Reveal>
           <div className="mt-12 grid gap-10 md:grid-cols-3">
             {prep.map((p, i) => (
               <Reveal key={p.title} delay={i * 0.1}>
@@ -29,7 +29,7 @@ export default function OnlineConsultation() {
               </Reveal>
             ))}
           </div>
-          <Reveal delay={0.2}><Link to="/book" className="btn-primary mt-12">Book Your Consultation</Link></Reveal>
+          <Reveal delay={0.2}><Link to="/book" className="btn-primary mt-12">{o.book}</Link></Reveal>
         </div>
       </section>
       <FAQSection />

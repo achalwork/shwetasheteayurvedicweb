@@ -1,25 +1,23 @@
 import { CalendarClock, HeartHandshake, MessageCircle, Sprout, Video } from 'lucide-react'
 import { Reveal, RiseHeading } from '../ui/Reveal'
 import { Leaf } from '../botanical/Botanicals'
+import { useLang } from '../../hooks/useLang'
 
-const items = [
-  { icon: HeartHandshake, title: 'Individual attention', text: 'Every consultation is centred on you — your concerns, your routine, your questions.' },
-  { icon: Video, title: 'Convenient online consultations', text: 'Speak with the doctor from home, wherever you are in Maharashtra and beyond.' },
-  { icon: Sprout, title: 'A thoughtful approach to Ayurvedic wellbeing', text: 'Guidance that looks at lifestyle, food and daily rhythm together.' },
-  { icon: CalendarClock, title: 'Simple appointment scheduling', text: 'Pick a service, a date and a time in a few clear steps.' },
-  { icon: MessageCircle, title: 'Clear communication', text: 'In Marathi, Hindi or English — whichever you are most comfortable with.' },
-]
+const ICONS = [HeartHandshake, Video, Sprout, CalendarClock, MessageCircle]
 
 export default function WhyChoose() {
+  const { site } = useLang()
+  const w = site.why
+  const items = w.items.map((it, i) => ({ ...it, icon: ICONS[i] }))
   return (
     <section className="relative overflow-hidden bg-beige py-24 sm:py-32">
       <Leaf aria-hidden className="pointer-events-none absolute -right-10 top-10 h-72 rotate-[20deg] text-forest/15" />
       <Leaf aria-hidden className="pointer-events-none absolute -left-12 bottom-6 h-56 -rotate-[28deg] text-terracotta/20" />
       <div className="wrap relative grid gap-14 lg:grid-cols-[1fr_1.25fr] lg:gap-24">
         <div>
-          <Reveal><p className="eyebrow">Why choose this practice</p></Reveal>
-          <RiseHeading text="Care that feels personal, simple and clear" className="h-section mt-6" />
-          <Reveal delay={0.1}><p className="mt-7 max-w-md text-[1.05rem] leading-relaxed text-ink-muted">A calm, well-organised experience from booking to consultation — designed so you can focus on your wellbeing.</p></Reveal>
+          <Reveal><p className="eyebrow">{w.eyebrow}</p></Reveal>
+          <RiseHeading text={w.heading} className="h-section mt-6" />
+          <Reveal delay={0.1}><p className="mt-7 max-w-md text-[1.05rem] leading-relaxed text-ink-muted">{w.intro}</p></Reveal>
         </div>
         <ul>
           {items.map((it, i) => (

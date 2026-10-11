@@ -4,11 +4,13 @@ import { motion, useScroll } from 'framer-motion'
 import Lenis from 'lenis'
 import Navbar from '../components/layout/Navbar'
 import Footer from '../components/layout/Footer'
+import { useLang } from '../hooks/useLang'
 
 type LenisWindow = Window & { __lenis?: Lenis | null }
 
 export default function MainLayout() {
   const { pathname } = useLocation()
+  const { site } = useLang()
   const { scrollYProgress } = useScroll()
   const showBar = !['/book', '/confirmation'].includes(pathname)
 
@@ -29,7 +31,7 @@ export default function MainLayout() {
 
   return (
     <div className={`flex min-h-screen flex-col ${showBar ? 'pb-[4.5rem] lg:pb-0' : ''}`}>
-      <a href="#main" className="sr-only z-[60] rounded-full bg-forest-deep px-4 py-2 text-ivory focus:not-sr-only focus:fixed focus:left-4 focus:top-4">Skip to content</a>
+      <a href="#main" className="sr-only z-[60] rounded-full bg-forest-deep px-4 py-2 text-ivory focus:not-sr-only focus:fixed focus:left-4 focus:top-4">{site.skip}</a>
       <motion.div aria-hidden style={{ scaleX: scrollYProgress }} className="fixed inset-x-0 top-0 z-[55] h-0.5 origin-left bg-terracotta" />
       <Navbar />
       <motion.main id="main" key={pathname} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }} className="flex-1">
@@ -38,7 +40,7 @@ export default function MainLayout() {
       <Footer />
       {showBar && (
         <div className="fixed inset-x-0 bottom-0 z-30 border-t border-forest/10 bg-ivory/95 p-3 backdrop-blur-md lg:hidden">
-          <Link to="/book" className="btn-primary w-full">Book Your Consultation</Link>
+          <Link to="/book" className="btn-primary w-full">{site.nav.mobileBar}</Link>
         </div>
       )}
     </div>

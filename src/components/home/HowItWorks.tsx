@@ -1,20 +1,19 @@
 import { motion } from 'framer-motion'
 import { CalendarCheck, Leaf, Video } from 'lucide-react'
 import { Reveal, RiseHeading } from '../ui/Reveal'
+import { useLang } from '../../hooks/useLang'
 
-const steps = [
-  { n: '01', icon: Leaf, title: 'Choose Your Service', text: 'Select the consultation that suits your needs.' },
-  { n: '02', icon: CalendarCheck, title: 'Select Your Appointment', text: 'Choose an available date and time.' },
-  { n: '03', icon: Video, title: 'Connect Online', text: 'Receive appointment details and join your scheduled consultation.' },
-]
+const META = [{ n: '01', icon: Leaf }, { n: '02', icon: CalendarCheck }, { n: '03', icon: Video }]
 
 export default function HowItWorks() {
+  const { site } = useLang()
+  const steps = site.how.steps.map((s, i) => ({ ...s, ...META[i] }))
   return (
     <section className="relative overflow-hidden bg-ivory py-24 sm:py-32">
       <div className="wrap">
         <div className="mx-auto max-w-2xl text-center">
-          <Reveal><p className="eyebrow">Simple &amp; unhurried</p></Reveal>
-          <RiseHeading text="How It Works" className="h-section mt-6" />
+          <Reveal><p className="eyebrow">{site.how.eyebrow}</p></Reveal>
+          <RiseHeading text={site.how.heading} className="h-section mt-6" />
         </div>
         <div className="relative mt-20 grid gap-14 md:grid-cols-3 md:gap-8">
           {/* connecting line (desktop) */}
