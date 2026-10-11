@@ -43,8 +43,9 @@ export default function HeroSection() {
           </motion.div>
         </div>
 
-        {/* portrait: arch + soft backdrop + one card */}
-        <div className="relative mx-auto w-full max-w-[26rem] md:ml-auto md:mr-0 lg:max-w-[27rem]">
+        {/* portrait: arch + soft backdrop + one card. Mobile var pr-4/pb-4 ne backdrop (offset 16px) screen chya baher jat nahi */}
+        <div className="mx-auto w-full max-w-[26rem] pb-4 pr-4 md:ml-auto md:mr-0 md:p-0 lg:max-w-[27rem]">
+        <div className="relative">
           <div aria-hidden className="absolute inset-0 translate-x-4 translate-y-4 rounded-t-[999px] rounded-b-[2rem] bg-sage-light" />
           <motion.div
             className="relative aspect-[4/5] overflow-hidden rounded-t-[999px] rounded-b-[2rem] bg-beige shadow-[0_24px_60px_-30px_rgba(23,55,44,.45)]"
@@ -59,6 +60,7 @@ export default function HeroSection() {
             <span className="grid h-10 w-10 place-items-center rounded-full bg-forest text-ivory"><Video className="h-4 w-4" /></span>
             <span className="text-sm font-semibold leading-tight text-forest-deep">Online consultation<br /><span className="font-normal text-ink-muted">Marathi · Hindi · English</span></span>
           </motion.div>
+        </div>
         </div>
       </div>
     </section>
