@@ -1,4 +1,4 @@
-import type { Service } from '../types'
+﻿import type { Service } from '../types'
 import { LIVE, SLOT_MINUTES } from './mode'
 
 /**
@@ -11,10 +11,10 @@ const RAW_SERVICES: Service[] = [
   {
     id: 'general-consultation',
     category: 'consultation',
-    name: { en: 'General Ayurvedic Consultation', mr: 'सर्वसाधारण आयुर्वेदिक सल्लामसलत' },
+    name: { en: 'General Ayurvedic Consultation', mr: 'सर्वसाधारण आयुर्वेदिक मार्गदर्शन' },
     description: {
       en: 'A personalized one-to-one consultation to talk through your concerns, daily habits and health history, with Ayurvedic guidance shaped around you.',
-      mr: 'तुमच्या तक्रारी, दैनंदिन सवयी आणि आरोग्याचा इतिहास यावर मोकळेपणाने बोलण्यासाठी वैयक्तिक, समोरासमोर सल्लामसलत — तुमच्यासाठी खास तयार केलेल्या आयुर्वेदिक मार्गदर्शनासह.',
+      mr: 'तुमच्या तक्रारी, दैनंदिन सवयी आणि आरोग्याचा इतिहास यावर मोकळेपणाने बोलण्यासाठी वैयक्तिक, समोरासमोर मार्गदर्शन — तुमच्यासाठी खास तयार केलेल्या आयुर्वेदिक मार्गदर्शनासह.',
     },
     durationMinutes: 30,
     fee: null,
@@ -24,7 +24,7 @@ const RAW_SERVICES: Service[] = [
   {
     id: 'lifestyle-wellness',
     category: 'wellness',
-    name: { en: 'Lifestyle and Wellness Consultation', mr: 'जीवनशैली आणि स्वास्थ्य सल्लामसलत' },
+    name: { en: 'Lifestyle and Wellness Consultation', mr: 'जीवनशैली आणि स्वास्थ्य मार्गदर्शन' },
     description: {
       en: 'Look at sleep, routine, work and seasonal habits together, and explore Ayurvedic ways to bring more balance into everyday life.',
       mr: 'झोप, दिनचर्या, काम आणि ऋतूनुसार सवयी यांचा एकत्र आढावा घ्या आणि रोजच्या जीवनात अधिक समतोल आणण्याचे आयुर्वेदिक मार्ग जाणून घ्या.',
@@ -37,7 +37,7 @@ const RAW_SERVICES: Service[] = [
   {
     id: 'stress-wellbeing',
     category: 'wellness',
-    name: { en: 'Stress and Wellbeing Consultation', mr: 'ताणतणाव आणि मानसिक स्वास्थ्य सल्लामसलत' },
+    name: { en: 'Stress and Wellbeing Consultation', mr: 'ताणतणाव आणि मानसिक स्वास्थ्य मार्गदर्शन' },
     description: {
       en: 'A calm, unhurried conversation about everyday stress, rest and mental wellbeing from an Ayurvedic point of view.',
       mr: 'रोजचा ताणतणाव, विश्रांती आणि मानसिक स्वास्थ्य याबद्दल आयुर्वेदाच्या दृष्टिकोनातून शांत, घाई न करता केलेला संवाद.',
@@ -63,7 +63,7 @@ const RAW_SERVICES: Service[] = [
   {
     id: 'follow-up',
     category: 'follow-up',
-    name: { en: 'Follow-up Consultation', mr: 'पुनर्भेट सल्लामसलत' },
+    name: { en: 'Follow-up Consultation', mr: 'पुनर्भेट मार्गदर्शन' },
     description: {
       en: 'A shorter check-in for existing patients to review how things are going and talk through any questions.',
       mr: 'सध्याच्या रुग्णांसाठी — प्रगतीचा आढावा घेण्यासाठी आणि शंकांवर बोलण्यासाठी एक छोटी भेट.',
@@ -76,10 +76,10 @@ const RAW_SERVICES: Service[] = [
   {
     id: 'online-consultation',
     category: 'consultation',
-    name: { en: 'Online Consultation', mr: 'ऑनलाइन सल्लामसलत' },
+    name: { en: 'Online Consultation', mr: 'ऑनलाइन मार्गदर्शन' },
     description: {
       en: 'A video consultation from the comfort of home, for patients who prefer not to travel to Kolhapur.',
-      mr: 'कोल्हापूरला येणे ज्यांना सोयीचे नाही अशा रुग्णांसाठी घरबसल्या व्हिडिओ सल्लामसलत.',
+      mr: 'कोल्हापूरला येणे ज्यांना सोयीचे नाही अशा रुग्णांसाठी घरबसल्या व्हिडिओ मार्गदर्शन.',
     },
     durationMinutes: 30,
     fee: null,
