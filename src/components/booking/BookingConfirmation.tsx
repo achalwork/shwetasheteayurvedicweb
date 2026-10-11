@@ -1,12 +1,14 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { CalendarDays, Clock, Home, IndianRupee, Info, Leaf, Plus, Video } from 'lucide-react'
+import { CalendarDays, Clock, Home, IndianRupee, Info, Leaf, MessageCircle, Plus, Video } from 'lucide-react'
 import { useBooking } from '../../hooks/useBooking'
 import { useHtmlLang, useLang } from '../../hooks/useLang'
 import { getService } from '../../data/services'
 import { formatDate, formatTime } from '../../utils/date'
 import { formatDuration, formatFee } from '../../utils/format'
 import { Lotus, Sprig } from '../botanical/Botanicals'
+
+const DOCTOR_WA = '917038139494'
 
 function SuccessMark() {
   return (
@@ -38,6 +40,11 @@ export default function BookingConfirmation() {
       </div>
     )
   }
+
+  const waText = encodeURIComponent(
+    `Hello Dr. Shweta, I have booked an online consultation.\n\nReference: ${booking.reference}\nName: ${p.fullName}\nDate: ${formatDate(booking.date, lang)}\nTime: ${formatTime(booking.time)} IST\nService: ${service.name[lang]}\n\nPlease confirm my appointment.`
+  )
+  const waUrl = `https://wa.me/${DOCTOR_WA}?text=${waText}`
 
   const rows = [
     { icon: Leaf, label: t.service, value: service.name[lang] },
@@ -83,8 +90,11 @@ export default function BookingConfirmation() {
           </div>
 
           <div className="flex flex-wrap justify-center gap-3 px-6 pb-12 pt-9 sm:px-12">
+            <a href={waUrl} target="_blank" rel="noopener noreferrer" className="btn-primary bg-[#25D366] hover:bg-[#1ebe5d]">
+              <MessageCircle className="h-4 w-4" />Send on WhatsApp
+            </a>
             <Link to="/" className="btn-outline" onClick={reset}><Home className="h-4 w-4" />{t.goHome}</Link>
-            <button type="button" className="btn-primary" onClick={() => { reset(); nav('/book') }}><Plus className="h-4 w-4" />{t.bookAnother}</button>
+            <button type="button" className="btn-outline" onClick={() => { reset(); nav('/book') }}><Plus className="h-4 w-4" />{t.bookAnother}</button>
           </div>
         </motion.div>
       </div>
