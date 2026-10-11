@@ -9,6 +9,10 @@ import { scrollToId } from '../../utils/format'
 const EASE = [0.22, 1, 0.36, 1] as const
 const line = (delay: number) => ({ initial: { y: '108%' }, animate: { y: 0 }, transition: { duration: 1, delay, ease: EASE } })
 
+// Photo la top-left pasun zoom kela ahe, mhanje tai frame chya center la yetat.
+// Tai ajun dava kade vattat astil tar 1.5 kara, ujavya kade vattat astil tar 1.3 kara.
+const PORTRAIT_ZOOM = 1.4
+
 export default function HeroSection() {
   return (
     <section className="relative isolate overflow-hidden bg-ivory">
@@ -46,7 +50,7 @@ export default function HeroSection() {
             className="relative aspect-[4/5] overflow-hidden rounded-t-[999px] rounded-b-[2rem] bg-beige shadow-[0_24px_60px_-30px_rgba(23,55,44,.45)]"
             initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, delay: 0.2, ease: EASE }}
           >
-            <img src={portrait} alt="Dr. Shweta Sanjay Shete" width={720} height={900} fetchPriority="high" className="h-full w-full object-cover object-[50%_8%]" />
+            <img src={portrait} alt="Dr. Shweta Sanjay Shete" width={720} height={900} fetchPriority="high" className="h-full w-full object-cover object-top" style={{ transformOrigin: '0% 0%', transform: `scale(${PORTRAIT_ZOOM})` }} />
           </motion.div>
           <motion.div
             initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.9, ease: EASE }}

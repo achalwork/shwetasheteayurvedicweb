@@ -24,7 +24,7 @@ export default function Portrait() {
           width={720}
           height={900}
           fetchPriority="high"
-          className="h-full w-full object-cover object-top"
+          className="h-full w-full object-cover object-[50%_20%]"
           initial={{ scale: 1.15 }}
           animate={{ scale: 1 }}
           transition={{ duration: 1.6, ease: [0.22, 1, 0.36, 1] }}
